@@ -1,24 +1,12 @@
-import {
-    AfterContentInit,
-    AfterViewInit,
-    Component,
-    ContentChild,
-    ContentChildren,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output, QueryList, TemplateRef,
-    ViewChild
-} from '@angular/core';
-import {COURSES} from '../../db-data';
-import {Course} from '../model/course';
-import {CourseImageComponent} from '../course-image/course-image.component';
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewEncapsulation } from '@angular/core';
+import { CourseImageComponent } from '../course-image/course-image.component';
+import { Course } from '../model/course';
 
 @Component({
     selector: 'course-card',
     templateUrl: './course-card.component.html',
-    styleUrls: ['./course-card.component.css']
+    styleUrls: ['./course-card.component.css'],
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
@@ -31,7 +19,7 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
     @Output('courseSelected')
     courseEmitter = new EventEmitter<Course>();
 
-    @ContentChildren(CourseImageComponent, {read: ElementRef})
+    @ContentChildren(CourseImageComponent, { read: ElementRef })
     images: QueryList<ElementRef>;
 
     constructor() {
@@ -69,10 +57,6 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
     cardStyles() {
         return {
             'background-image': 'url(' + this.course.iconUrl + ')'
-
         };
     }
-
-
-
 }
